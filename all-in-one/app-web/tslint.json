@@ -1,0 +1,9 @@
+{
+  "extends": ["tslint-config-standard"],
+  "defaultSeverity": "error",
+  "linterOptions": {
+    "exclude": [
+      "node_modules/**/*.ts"
+    ]
+  }
+}

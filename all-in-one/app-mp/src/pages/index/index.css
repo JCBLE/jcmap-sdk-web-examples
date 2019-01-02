@@ -1,0 +1,46 @@
+
+.page-container {
+  padding: 0px 80px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.shortcut-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.section-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.sub-container {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sub-item {
+  flex: 1;
+  min-width: 33.33333333333%;
+}
+
+.h1-title {
+  font-size: 30px;
+  color: #020433;
+  letter-spacing: 0;
+  line-height: 40px;
+  font-weight: bolder;
+}
+
+.h2-title {
+  font-size: 18px;
+  color: #020433;
+  font-weight: bold;
+}

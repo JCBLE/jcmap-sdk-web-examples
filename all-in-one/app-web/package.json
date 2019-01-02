@@ -1,0 +1,38 @@
+{
+  "name": "app-web",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@jcmap-sdk-web/beacon-locator": "^1.9.0-alpha.0",
+    "@jcmap-sdk-web/beacon-puller": "^1.9.0-alpha.0",
+    "@jcmap-sdk-web/fusion-locator": "^1.9.0-alpha.0",
+    "@jcmap-sdk-web/navegador": "^1.9.0-alpha.0",
+    "@jcmap-sdk-web/renderer": "^1.9.0-alpha.0",
+    "react": "^16.6.1",
+    "react-dom": "^16.6.1"
+  },
+  "scripts": {
+    "watch": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "devDependencies": {
+    "@types/jest": "23.3.9",
+    "@types/node": "10.12.10",
+    "@types/react": "*",
+    "@types/react-dom": "*",
+    "react-scripts": "2.1.2",
+    "tslint": "^5.12.0",
+    "typescript": "3.2.2"
+  }
+}
