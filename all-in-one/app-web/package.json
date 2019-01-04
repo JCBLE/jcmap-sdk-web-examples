@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@jcmap-sdk-web/beacon-locator": "^1.9.0-alpha.0",
-    "@jcmap-sdk-web/beacon-puller": "^1.9.0-alpha.0",
-    "@jcmap-sdk-web/fusion-locator": "^1.9.0-alpha.0",
-    "@jcmap-sdk-web/navegador": "^1.9.0-alpha.0",
-    "@jcmap-sdk-web/renderer": "^1.9.0-alpha.0",
+    "@jcmap-sdk-web/beacon-locator": "^1.9.2-alpha.0",
+    "@jcmap-sdk-web/beacon-puller": "^1.9.2-alpha.0",
+    "@jcmap-sdk-web/fusion-locator": "^1.9.2-alpha.0",
+    "@jcmap-sdk-web/navegador": "^1.9.2-alpha.0",
+    "@jcmap-sdk-web/renderer": "^1.9.2-alpha.0",
     "react": "^16.6.1",
     "react-dom": "^16.6.1"
   },

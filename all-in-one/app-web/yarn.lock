@@ -927,37 +927,37 @@
   resolved "https://nexus.jcbel.com/repository/npm/@emotion/weak-memoize/-/weak-memoize-0.2.2.tgz#63985d3d8b02530e0869962f4da09142ee8e200e"
   integrity sha1-Y5hdPYsCUw4IaZYvTaCRQu6OIA4=
 
-"@jcmap-sdk-web/beacon-locator@^1.9.0-alpha.0":
-  version "1.9.0-alpha.0"
-  resolved "https://registry.npmjs.org/@jcmap-sdk-web/beacon-locator/-/beacon-locator-1.9.0-alpha.0.tgz#2a5b218f4978ff62b16065fa82b46cac11e8a0ce"
-  integrity sha512-YNRoRyFxe5irH8f5XCFhPqi+ehIq1H0C+PlE0nYoHRfJPPBWPYewZyREGcwrA3yU6R8f1pr2Mi6sUrFDkcS0xQ==
+"@jcmap-sdk-web/beacon-locator@^1.9.2-alpha.0":
+  version "1.9.2-alpha.0"
+  resolved "https://registry.npmjs.org/@jcmap-sdk-web/beacon-locator/-/beacon-locator-1.9.2-alpha.0.tgz#4058a16e081b530748c66e904986c91279b52833"
+  integrity sha512-XYkWWRdxXIchpjMb6Z9CIdRRCp32rKKfuPsOW6sXwARrHV79xHQInmiRIIMsQ3Q16iohQwpeGEM4DcpLNHYwxA==
   dependencies:
     "@babel/polyfill" "^7.2.5"
-    "@jcmap-sdk-web/navegador" "^1.9.0-alpha.0"
-    "@jcmap-sdk-web/wxmp-better-api" "^1.9.0-alpha.0"
+    "@jcmap-sdk-web/navegador" "^1.9.2-alpha.0"
+    "@jcmap-sdk-web/wxmp-better-api" "^1.9.2-alpha.0"
     "@types/ramda" "^0.25.46"
     events "^3.0.0"
     ramda "^0.26.1"
 
-"@jcmap-sdk-web/beacon-puller@^1.9.0-alpha.0":
-  version "1.9.0-alpha.0"
-  resolved "https://registry.npmjs.org/@jcmap-sdk-web/beacon-puller/-/beacon-puller-1.9.0-alpha.0.tgz#162044a9f2539f577f12c9547be16fa410674ff4"
-  integrity sha512-qdRAfl849wL7Cjm1IFEgdWL3rbwKcNqN570YoaWysOAG2NLDiw0Awkj7IamBOymIYoLDx/EihR6rxdjmml+n8A==
+"@jcmap-sdk-web/beacon-puller@^1.9.2-alpha.0":
+  version "1.9.2-alpha.0"
+  resolved "https://registry.npmjs.org/@jcmap-sdk-web/beacon-puller/-/beacon-puller-1.9.2-alpha.0.tgz#78ab5e6c8e7448e088851855295c4b54068811d1"
+  integrity sha512-r0scle85VRVCbczXQ76B7ib40XznUurkWNndsHWn0YsXuhJ4yeoQpLisjG2K4H7SXKOXpqAoTKwzlcCm7fpwKQ==
   dependencies:
     "@babel/polyfill" "^7.2.5"
-    "@jcmap-sdk-web/utils" "^1.9.0-alpha.0"
+    "@jcmap-sdk-web/utils" "^1.9.2-alpha.0"
     events "^3.0.0"
     rxjs "^6.3.3"
 
-"@jcmap-sdk-web/fusion-locator@^1.9.0-alpha.0":
-  version "1.9.0-alpha.0"
-  resolved "https://registry.npmjs.org/@jcmap-sdk-web/fusion-locator/-/fusion-locator-1.9.0-alpha.0.tgz#9e78e3890d351778317ddbffbf6708b369fa6935"
-  integrity sha512-n5rTkZ+G4cHwxfIwKviaWNbFjMtbD7nzopz2nsuHYvMSCIpWRX1bKO043rbFBM2Ye/GbkWmScZDtu6QfYLZ6uw==
+"@jcmap-sdk-web/fusion-locator@^1.9.2-alpha.0":
+  version "1.9.2-alpha.0"
+  resolved "https://registry.npmjs.org/@jcmap-sdk-web/fusion-locator/-/fusion-locator-1.9.2-alpha.0.tgz#666618dd5d65689427ea13bc212fd5139218296b"
+  integrity sha512-lPdK0xRyuYPesRfTCe641z3uKFHpDd4jzugZPojxzI6Wn0sXmh4tA7FgjBfeyTYBgHGPBL+1rfyvKaYPSanQWw==
   dependencies:
     "@babel/polyfill" "^7.2.5"
-    "@jcmap-sdk-web/beacon-locator" "^1.9.0-alpha.0"
-    "@jcmap-sdk-web/navegador" "^1.9.0-alpha.0"
-    "@jcmap-sdk-web/satellite-locator" "^1.9.0-alpha.0"
+    "@jcmap-sdk-web/beacon-locator" "^1.9.2-alpha.0"
+    "@jcmap-sdk-web/navegador" "^1.9.2-alpha.0"
+    "@jcmap-sdk-web/satellite-locator" "^1.9.2-alpha.0"
     "@turf/turf" "^5.1.6"
     events "^3.0.0"
     rxjs "^6.3.3"
@@ -967,28 +967,28 @@
   resolved "https://registry.npmjs.org/@jcmap-sdk-web/navegador-core/-/navegador-core-1.2.2.tgz#35b6c0fdcdc6db9fe94c7768d709edc6a086d56d"
   integrity sha512-qu2RXsoZVe3APhMXCuNOAbwpTdvhfR2B0UpHw2maoTymSm+PXmvuNvteIc3LunNCkFa4mwnLSnz2Ioqhp4TBvg==
 
-"@jcmap-sdk-web/navegador@^1.9.0-alpha.0":
-  version "1.9.0-alpha.0"
-  resolved "https://registry.npmjs.org/@jcmap-sdk-web/navegador/-/navegador-1.9.0-alpha.0.tgz#84aed0d4116736a4feee651645b156ba328527f9"
-  integrity sha512-eLKgT0QGqqZy3bI06e+OIOz0Ed3qL8NvX2783kYpESpMclcxPmZFXnnc+F37NotLl/tOzJuKppyyIJvACaSOag==
+"@jcmap-sdk-web/navegador@^1.9.2-alpha.0":
+  version "1.9.2-alpha.0"
+  resolved "https://registry.npmjs.org/@jcmap-sdk-web/navegador/-/navegador-1.9.2-alpha.0.tgz#8013c4f70464edac2b890605f00d0ee472b462fd"
+  integrity sha512-ij0L6/Ty8rCRSQJL4W27VsXqq1w2XJSyzq8RnLKdHQAeUhiEe28o7sLzr0qLBX+sgfVrXaQy4Iur/gcIj3XKDQ==
   dependencies:
     "@babel/polyfill" "^7.2.5"
     "@jcmap-sdk-web/navegador-core" "^1.2.2"
-    "@jcmap-sdk-web/wxmp-better-api" "^1.9.0-alpha.0"
+    "@jcmap-sdk-web/wxmp-better-api" "^1.9.2-alpha.0"
     "@turf/turf" "^5.1.6"
     "@types/ramda" "^0.25.46"
     events "^3.0.0"
     ramda "^0.26.1"
     rxjs "^6.3.3"
 
-"@jcmap-sdk-web/renderer@^1.9.0-alpha.0":
-  version "1.9.0-alpha.0"
-  resolved "https://registry.npmjs.org/@jcmap-sdk-web/renderer/-/renderer-1.9.0-alpha.0.tgz#3e357df7fc4908933a7905f40c4357f9e071a681"
-  integrity sha512-5qQdYCJbMLoKl4kVvsDv2PFYMlXXqbDvYNcXt2Av6wlACm+aU5bGuW8BsLnNQniEq+7/pfKAT9nHjtdY7Ma8Hg==
+"@jcmap-sdk-web/renderer@^1.9.2-alpha.0":
+  version "1.9.2-alpha.0"
+  resolved "https://registry.npmjs.org/@jcmap-sdk-web/renderer/-/renderer-1.9.2-alpha.0.tgz#181c626c888970d2eba4277421ea9a02a8e824b0"
+  integrity sha512-lj8O9KGjnqJVTRuQerxVKuILcBQUcw6pH5YEefeiGxveylwynlsqsKnJmP63lk2s0u9D+9kTbMIEDGnSs8MkYQ==
   dependencies:
     "@babel/polyfill" "^7.2.5"
-    "@jcmap-sdk-web/navegador" "^1.9.0-alpha.0"
-    "@jcmap-sdk-web/utils" "^1.9.0-alpha.0"
+    "@jcmap-sdk-web/navegador" "^1.9.2-alpha.0"
+    "@jcmap-sdk-web/utils" "^1.9.2-alpha.0"
     "@turf/turf" "^5.1.6"
     "@types/mapbox-gl" "^0.51.3"
     "@types/nanoid" "^1.2.0"
@@ -1003,29 +1003,29 @@
     rxjs "^6.3.3"
     sweetalert2 "^7.33.1"
 
-"@jcmap-sdk-web/satellite-locator@^1.9.0-alpha.0":
-  version "1.9.0-alpha.0"
-  resolved "https://registry.npmjs.org/@jcmap-sdk-web/satellite-locator/-/satellite-locator-1.9.0-alpha.0.tgz#a2821c95db949d65ed5cc336e63413aa93fcdff8"
-  integrity sha512-W7Te0UN/V9rH7ARX5GLo+97OzdDlUysVupZttYFzwRqQOJPRrIaoxqI6mqqjO7P/zfHwAM4h9owuh01VBm/UeQ==
+"@jcmap-sdk-web/satellite-locator@^1.9.2-alpha.0":
+  version "1.9.2-alpha.0"
+  resolved "https://registry.npmjs.org/@jcmap-sdk-web/satellite-locator/-/satellite-locator-1.9.2-alpha.0.tgz#0ab5393cb86b1e4dc021f7c4ba50ea6cea886ed1"
+  integrity sha512-zhoXzVEHBCzF3KiKdXsd0eB+14i66Uyqk3S852m/k0/G2PrcdSCfVzjuGDmrRtVTuPATYprBMrXy/ulEtguEVQ==
   dependencies:
     "@babel/polyfill" "^7.2.5"
     "@turf/turf" "^5.1.6"
     events "^3.0.0"
     rxjs "^6.3.3"
 
-"@jcmap-sdk-web/utils@^1.9.0-alpha.0":
-  version "1.9.0-alpha.0"
-  resolved "https://registry.npmjs.org/@jcmap-sdk-web/utils/-/utils-1.9.0-alpha.0.tgz#ddc79cd9b5128d71eaa5aa3f5447d84642cf837b"
-  integrity sha512-rGx0DF3Hr0XdYXgnUUBHFSaXShgiR7TYUitP8+HJEX8UUyilw/m3ryugtBJU1DVlxZr7gSVT+Ec3n2Uhab+M1Q==
+"@jcmap-sdk-web/utils@^1.9.2-alpha.0":
+  version "1.9.2-alpha.0"
+  resolved "https://registry.npmjs.org/@jcmap-sdk-web/utils/-/utils-1.9.2-alpha.0.tgz#e335d7c6f03be468718b5b6e4c285e43fe393cd5"
+  integrity sha512-UT4keXr0gWYbnV2j9I80BZ5FYY+nHreNIevlxk1Eb6vA02FWisEAHuQr+XgKcx8o+NIKsZ07rMP5LKa+cJBoQA==
   dependencies:
     "@babel/polyfill" "^7.2.5"
     "@types/ramda" "^0.25.46"
     ramda "^0.26.1"
 
-"@jcmap-sdk-web/wxmp-better-api@^1.9.0-alpha.0":
-  version "1.9.0-alpha.0"
-  resolved "https://registry.npmjs.org/@jcmap-sdk-web/wxmp-better-api/-/wxmp-better-api-1.9.0-alpha.0.tgz#b5811ec3c2a42621372e0d0ca61e018c1fd750d6"
-  integrity sha512-cGn707+GkRHYApiUDnA9GsU5GUqN4b57B8Zr+thBi5ujIO93nBqRQImC4t/nm0wQOSYvawM2gMMJAEcpcTyPuw==
+"@jcmap-sdk-web/wxmp-better-api@^1.9.2-alpha.0":
+  version "1.9.2-alpha.0"
+  resolved "https://registry.npmjs.org/@jcmap-sdk-web/wxmp-better-api/-/wxmp-better-api-1.9.2-alpha.0.tgz#33ec2d40998f0ceac3e7fc4d02fabc94b7d81971"
+  integrity sha512-feVTYJfCxfkP4H6cwzuzG8dY2ZA8eLBvJMUc89POkAF8RQbDeFMV7QuwIBxsMI6X2FJHj0OATNWipHbKifm2jA==
   dependencies:
     "@babel/polyfill" "^7.2.5"
 
