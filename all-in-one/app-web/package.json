@@ -3,13 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@jcmap-sdk-web/beacon-locator": "^1.9.2-alpha.0",
-    "@jcmap-sdk-web/beacon-puller": "^1.9.2-alpha.0",
-    "@jcmap-sdk-web/fusion-locator": "^1.9.2-alpha.0",
-    "@jcmap-sdk-web/navegador": "^1.9.2-alpha.0",
-    "@jcmap-sdk-web/renderer": "^1.9.2-alpha.0",
-    "react": "^16.6.1",
-    "react-dom": "^16.6.1"
+    "@jcmap-sdk-web/beacon-locator": "^1.12.2-alpha.0",
+    "@jcmap-sdk-web/beacon-puller": "^1.12.2-alpha.0",
+    "@jcmap-sdk-web/fusion-locator": "^1.12.2-alpha.0",
+    "@jcmap-sdk-web/navegador": "^1.12.2-alpha.0",
+    "@jcmap-sdk-web/renderer": "^1.12.3-alpha.0",
+    "react": "^16.8.2",
+    "react-dom": "^16.8.2"
   },
   "scripts": {
     "watch": "react-scripts start",
@@ -27,12 +27,12 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "@types/jest": "23.3.9",
-    "@types/node": "10.12.10",
+    "@types/jest": "24.0.5",
+    "@types/node": "11.9.4",
     "@types/react": "*",
     "@types/react-dom": "*",
-    "react-scripts": "2.1.2",
-    "tslint": "^5.12.0",
-    "typescript": "3.2.2"
+    "react-scripts": "2.1.5",
+    "tslint": "^5.12.1",
+    "typescript": "3.3.3"
   }
 }

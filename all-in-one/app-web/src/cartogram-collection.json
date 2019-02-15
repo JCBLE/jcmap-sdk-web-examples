@@ -17699,7 +17699,7 @@
       ],
       "properties": {
         "name": "小样地下车库-1",
-        "floor_label": "P-B1",
+        "floor_label": "B1",
         "floor_number": -1
       }
     },
@@ -34326,7 +34326,7 @@
       ],
       "properties": {
         "name": "小样地下车库-2楼",
-        "floor_label": "P-B2",
+        "floor_label": "B2",
         "floor_number": -2
       }
     },

@@ -5,19 +5,18 @@ import {
   DroppingPointMarker,
   FeaturePicker,
   FeatureSearchControl,
-  FinishingPointMarker,
-  LocateMyselfButton,
   LocationMarker,
   NavegadorControl,
   NavigationLinePreviewer,
   Renderer,
   SelectedFeatureControl,
   Snackbar,
-  StartingPointMarker
+  StartingPointMarker,
+  defaultNavegadorLinePaint,
+  defaultNavegadorLineLayout
 } from '@jcmap-sdk-web/renderer'
 import mapData from './cartogram-collection.json'
 import { decodeMapData } from './utils'
-// import SatelliteLocator from '@jcmap-sdk-web/satellite-locator';
 import BeaconLocator from '@jcmap-sdk-web/beacon-locator'
 import FusionLocator from '@jcmap-sdk-web/fusion-locator'
 import {
@@ -27,7 +26,8 @@ import {
   NavegadorTask,
   NavigationInfo,
   NavigationMode,
-  NavigationPosition
+  NavigationPosition,
+  CartogramCollection
 } from '@jcmap-sdk-web/navegador'
 import BeaconPuller from '@jcmap-sdk-web/beacon-puller'
 import {
@@ -35,6 +35,8 @@ import {
 } from 'url'
 import turfCenterOfMass from '@turf/center-of-mass'
 import turfLength from '@turf/length'
+import LocateMyselfButton from './LocateMyselfButton'
+import FinishingPointMarker from './FinishingPointMarker'
 
 const cartogramCollection = decodeMapData(mapData)
 
@@ -48,7 +50,9 @@ class App extends Component<any, any> {
   navigationLinePreviewer?: NavigationLinePreviewer
   renderer: Renderer
   selectedFeature?: CartogramFeature
-  selectedFeaturePopup = new SelectedFeatureControl()
+  startingPointFeaturePopup = new SelectedFeatureControl()
+  finishingPointFeaturePopup = new SelectedFeatureControl()
+  previewFeaturePopup = new SelectedFeatureControl()
   startingPoint?: NavigationPosition
   startingPointMarker = new StartingPointMarker()
   navigationMode = NavigationMode.Walking
@@ -59,6 +63,33 @@ class App extends Component<any, any> {
   latestLocation?: NavigationPosition
   featureSearch = new FeatureSearchControl()
   snackbar = new Snackbar()
+  iconSet: { [key: string]: any } = {
+    'atm':  require('./icons/atm.png'),
+    'bus':  require('./icons/bus.png'),
+    'coach':  require('./icons/coach.png'),
+    'drinking water':  require('./icons/drinking water.png'),
+    'Entrance and exit':  require('./icons/Entrance and exit.png'),
+    'Entrance':  require('./icons/Entrance.png'),
+    'escalator':  require('./icons/escalator.png'),
+    'escape exit':  require('./icons/escape exit.png'),
+    'Export':  require('./icons/Export.png'),
+    'Handicapped restroom':  require('./icons/Handicapped restroom.png'),
+    'infirmary':  require('./icons/infirmary.png'),
+    'lift':  require('./icons/lift.png'),
+    'net car':  require('./icons/net car.png'),
+    'nursery room':  require('./icons/nursery room.png'),
+    'Parking autonomous payment machine':  require('./icons/Parking autonomous payment machine.png'),
+    'parking lot':  require('./icons/parking lot.png'),
+    'police':  require('./icons/police.png'),
+    'rail ticket office':  require('./icons/rail ticket office.png'),
+    'service desk':  require('./icons/service desk.png'),
+    'stair':  require('./icons/stair.png'),
+    'supermarket':  require('./icons/supermarket.png'),
+    'taxi':  require('./icons/taxi.png'),
+    'toilet':  require('./icons/toilet.png'),
+    'Train outbound Lobby':  require('./icons/Train outbound Lobby.png'),
+    'vending machine':  require('./icons/vending machine.png')
+  }
 
   constructor (props: any) {
     super(props)
@@ -85,7 +116,7 @@ class App extends Component<any, any> {
             .fitCartogram(cartogram)
         }
       })
-      .attach(renderer)
+      .attach(renderer, 'bottom-left')
 
     // 添加返回当前组件
     const locateMyselfButton = this.locateMyselfButton
@@ -99,7 +130,7 @@ class App extends Component<any, any> {
           }
         }
       })
-      .attach(renderer)
+      .attach(renderer, 'bottom-right')
 
     // 当前位置显示组件
     this.locationMarker.attach(renderer)
@@ -113,26 +144,51 @@ class App extends Component<any, any> {
     // 起点
     this.startingPointMarker.attach(renderer)
 
-    // PoI 信息展示
-    const selectedFeaturePopup = this.selectedFeaturePopup
-    selectedFeaturePopup
+    // 起点信息展示
+    const startingPointFeaturePopup = this.startingPointFeaturePopup
+    startingPointFeaturePopup
       .on('confirm', (selectedFeature) => {
         this.droppingPointMarker.update({ visiable: false })
-        this.selectedFeaturePopup.update({ visiable: false })
+        startingPointFeaturePopup.update({ visiable: false })
 
         const featureCenter = turfCenterOfMass(selectedFeature, selectedFeature.properties) as NavigationPosition
+
+        this.startingPoint = featureCenter
+        this.startingPointMarker.update({ visiable: true, position: featureCenter })
+
+        navigationLinePreviewer.update({
+          visiable: true,
+          startingPoint: this.startingPoint,
+          finishingPoint: this.finishingPoint
+        })
+        if (this.startingPoint && this.finishingPoint) {
+          this.previewFeaturePopup.update({
+            visiable: true,
+            feature: this.finishingPoint as any,
+            confirmText: '开始导航'
+          })
+        }
+      })
+      .on('cancel', () => {
+        this.droppingPointMarker.update({ visiable: false })
+      })
+      .attach(renderer, 'bottom')
+
+    // 终点信息展示
+    const finishingPointFeaturePopup = this.finishingPointFeaturePopup
+    finishingPointFeaturePopup
+      .on('confirm', (selectedFeature) => {
+        this.droppingPointMarker.update({ visiable: false })
+        this.finishingPointFeaturePopup.update({ visiable: false })
+
+        const featureCenter = turfCenterOfMass(selectedFeature, selectedFeature.properties) as NavigationPosition
+
+        this.finishingPoint = featureCenter
+        this.finishingPointMarker.update({ visiable: true, position: featureCenter })
 
         if (!this.startingPoint && this.latestLocation) {
           this.startingPoint = this.latestLocation
           this.startingPointMarker.update({ visiable: true, position: this.latestLocation })
-        }
-
-        if (this.finishingPoint && !this.startingPoint) {
-          this.startingPoint = featureCenter
-          this.startingPointMarker.update({ visiable: true, position: featureCenter })
-        } else {
-          this.finishingPoint = featureCenter
-          this.finishingPointMarker.update({ visiable: true, position: featureCenter })
         }
 
         navigationLinePreviewer.update({
@@ -140,11 +196,92 @@ class App extends Component<any, any> {
           startingPoint: this.startingPoint,
           finishingPoint: this.finishingPoint
         })
+        if (this.startingPoint && this.finishingPoint) {
+          this.previewFeaturePopup.update({
+            visiable: true,
+            feature: this.finishingPoint as any,
+            confirmText: '开始导航'
+          })
+        }
       })
       .on('cancel', () => {
         this.droppingPointMarker.update({ visiable: false })
       })
-      .attach(renderer)
+      .attach(renderer, 'bottom')
+
+    // 预览终点信息展示
+    const previewFeaturePopup = this.previewFeaturePopup
+    previewFeaturePopup
+      .on('confirm', () => {
+        const { navigationMode, startingPoint, finishingPoint } = this
+        this.droppingPointMarker.update({ visiable: false })
+        previewFeaturePopup.update({ visiable: false })
+
+        navigationLinePreviewer.update({ visiable: false })
+        this.startingPointMarker.update({ visiable: false })
+        this.featureSearch.update({ visiable: false })
+        if (this.navigationTask) {
+          console.error(new Error('已经有导航任务在运行'))
+        }
+        const navigationTask = this.navigationTask = navegador.startNavigation(navigationMode, startingPoint!, finishingPoint!)
+        router.once('stop', () => {
+          navigationTask.stop()
+          this.navigationTask = undefined
+          router.update({
+            visiable: false
+          })
+          this.finishingPointMarker.update({ visiable: false })
+          this.locationMarker.update({
+            visiable: true,
+            position: this.latestLocation as NavigationPosition
+          })
+        })
+        const handleLocationChange = navigationTask.setCurrentLocation.bind(navigationTask)
+        navigationTask
+          .on('stop', () => {
+            fusionLocator.removeListener('location', handleLocationChange)
+            fusionLocator.off('location', handleLocationChange)
+          })
+          .on('start', () => {
+            fusionLocator.on('location', handleLocationChange)
+          })
+          .on('info', (info: NavigationInfo) => {
+            const {
+              currentLocation,
+              navigationPath,
+              navigationStatus
+            } = info
+            this.locationMarker.update({
+              visiable: true,
+              position: currentLocation
+            })
+
+            router.update({
+              visiable: true,
+              navigationChain: navigationPath,
+              navigationStatus,
+              footer: genFeatureItem(cartogramCollection, this.iconSet, this.finishingPoint! as any)
+            })
+
+            const distanceToEnd = turfLength(navigationPath) * 1000
+            if (distanceToEnd < 5) {
+              this.snackbar.showMessage({
+                text: '目的地就在附近',
+                actionVisiable: true,
+                actionText: '结束导航',
+                onAction: () => {
+                  navigationTask.stop()
+                },
+                timeout: 5000
+              })
+            }
+          })
+          .start()
+      })
+      .on('cancel', () => {
+        this.droppingPointMarker.update({ visiable: false })
+      })
+      .attach(renderer, 'bottom')
 
     // 定位器
     const navegador = this.navegador = new Navegador({ floors: cartogramCollection.floors })
@@ -180,31 +317,49 @@ class App extends Component<any, any> {
           visiable: true,
           position: turfCenterOfMass(selectedFeature, selectedFeature.properties) as NavigationPosition
         })
-        this.selectedFeaturePopup.update({
-          visiable: true,
-          feature: selectedFeature,
-          confirmText: this.finishingPoint && !this.startingPoint ? '设置起点' : '去这里'
-        })
+        if (this.finishingPoint && !this.startingPoint) {
+          this.startingPointFeaturePopup.update({
+            visiable: true,
+            feature: selectedFeature,
+            confirmText: '设置起点'
+          })
+        } else {
+          this.finishingPointFeaturePopup.update({
+            visiable: true,
+            feature: selectedFeature,
+            confirmText: '去这里'
+          })
+        }
       })
       .attach(renderer)
 
     // Snackbar
-    this.snackbar.attach(renderer)
+    this.snackbar.attach(renderer, 'bottom')
 
     // 导航模式组件
-    const router = new NavegadorControl()
+    const router = new NavegadorControl({})
     router
       .on('stop', () => {
         this.featureSearch.update({ visiable: true })
       })
-      .attach(renderer)
+      .attach(renderer, 'top')
 
     // 线路预览
     const navigationLinePreviewer = this.navigationLinePreviewer = new NavigationLinePreviewer({
       navegador: navegador,
       navigationMode: this.navigationMode,
       startingPoint: this.startingPoint,
-      finishingPoint: this.finishingPoint
+      finishingPoint: this.finishingPoint,
+      linePaint: {
+        ...defaultNavegadorLinePaint,
+        'line-opacity': 1
+      },
+      lineLayout: {
+        ...defaultNavegadorLineLayout,
+        'line-cap': 'round',
+        'line-join': 'round'
+      },
+      arrowImg: require('./images/jiantou.png')
     })
     navigationLinePreviewer
       .on('swap', (evt) => {
@@ -237,70 +392,7 @@ class App extends Component<any, any> {
         this.finishingPointMarker.update({ visiable: false })
         navigationLinePreviewer.update({ visiable: false })
       })
-      .on('start', ({ navigationMode, startingPoint, finishingPoint }) => {
-        navigationLinePreviewer.update({ visiable: false })
-        this.startingPointMarker.update({ visiable: false })
-        this.featureSearch.update({ visiable: false })
-        if (this.navigationTask) {
-          console.error(new Error('已经有导航任务在运行'))
-        }
-        const navigationTask = this.navigationTask = navegador.startNavigation(navigationMode, startingPoint, finishingPoint)
-        router.once('stop', () => {
-          navigationTask.stop()
-          this.navigationTask = undefined
-          router.update({
-            visiable: false
-          })
-          this.finishingPointMarker.update({ visiable: false })
-          this.locationMarker.update({
-            visiable: true,
-            position: this.latestLocation as NavigationPosition
-          })
-        })
-        const handleLocationChange = navigationTask.setCurrentLocation.bind(navigationTask)
-        navigationTask
-          .on('stop', () => {
-            fusionLocator.removeListener('location', handleLocationChange)
-            fusionLocator.off('location', handleLocationChange)
-          })
-          .on('start', () => {
-            fusionLocator.on('location', handleLocationChange)
-          })
-          .on('info', (info: NavigationInfo) => {
-            console.log(info)
-            const {
-              currentLocation,
-              navigationPath,
-              navigationStatus
-            } = info
-            this.locationMarker.update({
-              visiable: true,
-              position: currentLocation
-            })
-
-            router.update({
-              visiable: true,
-              navigationChain: navigationPath,
-              navigationStatus
-            })
-
-            const distanceToEnd = turfLength(navigationPath) * 1000
-            console.log(distanceToEnd)
-            if (distanceToEnd < 5) {
-              this.snackbar.showMessage({
-                text: '目的地就在附近',
-                actionVisiable: true,
-                actionText: '结束导航',
-                onAction: () => {
-                  navigationTask.stop()
-                },
-                timeout: 5000
-              })
-            }
-          })
-          .start()
-      })
-      .attach(renderer)
+      .attach(renderer, 'top')
 
     // 搜索框
     this.featureSearch
@@ -316,13 +408,21 @@ class App extends Component<any, any> {
           visiable: true,
           position: turfCenterOfMass(selectedFeature, selectedFeature.properties) as NavigationPosition
         })
-        this.selectedFeaturePopup.update({
-          visiable: true,
-          feature: selectedFeature,
-          confirmText: this.finishingPoint && !this.startingPoint ? '设置起点' : '去这里'
-        })
+        if (this.finishingPoint && !this.startingPoint) {
+          this.startingPointFeaturePopup.update({
+            visiable: true,
+            feature: selectedFeature,
+            confirmText: '设置起点'
+          })
+        } else {
+          this.finishingPointFeaturePopup.update({
+            visiable: true,
+            feature: selectedFeature,
+            confirmText: '去这里'
+          })
+        }
       })
-      .attach(renderer)
+      .attach(renderer, 'top')
   }
 
   componentDidMount () {
@@ -331,9 +431,44 @@ class App extends Component<any, any> {
 
   render () {
     return (
-      <div className='mapa-container' ref={this.mapaContainer}></div>
+      <div style={{ height: '100vh' }} ref={this.mapaContainer}></div>
     )
   }
 }
 
 export default App
+
+function getFeatureIcon (iconSet: { [key: string]: any }, feature: CartogramFeature) {
+  const layerCode = feature.properties['layer:code']
+  let icon
+
+  switch (layerCode) {
+    case 'icon':
+      icon = iconSet[feature.properties.type]
+      break
+    case 'park':
+    default:
+      icon = require('./icons/kongchewei.png')
+      break
+  }
+
+  return icon
+}
+
+function findCartogram (cartogramCollections: CartogramCollection, feature: CartogramFeature) {
+  return cartogramCollections.floors.find(f => f.id === feature.properties.cartogram_id)
+}
+
+function genFeatureItem (cartogramCollection: any, iconSet: any, feature: CartogramFeature) {
+  const cartogram = findCartogram(cartogramCollection, feature)
+  const icon = getFeatureIcon(iconSet, feature)
+
+  return {
+    visiable: true,
+    feature,
+    id: feature.id + '',
+    icon,
+    title: feature.properties.name || '',
+    detail: cartogram && cartogram.properties.floor_label || ''
+  }
+}
